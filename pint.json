@@ -1,0 +1,12 @@
+{
+  "preset": "laravel",
+  "rules": {
+    "single_quote": true,
+    "array_syntax": {
+      "syntax": "short"
+    },
+    "no_trailing_whitespace": true,
+    "no_trailing_comma_in_singleline": true,
+    "trailing_comma_in_multiline": true
+  }
+}

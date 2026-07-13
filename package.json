@@ -1,0 +1,42 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "format": "prettier --write . && ./vendor/bin/pint"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 120,
+    "trailingComma": "es5",
+    "tailwindFunctions": [
+      "clsx",
+      "tw"
+    ],
+    "plugins": [
+      "prettier-plugin-organize-imports",
+      "prettier-plugin-tailwindcss"
+    ]
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.2",
+    "concurrently": "^10.0.3",
+    "laravel-vite-plugin": "^3.1.3",
+    "prettier": "^3.9.5",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "tailwindcss": "^4.3.2",
+    "vite": "^8.1.4"
+  },
+  "dependencies": {
+    "@inertiajs/react": "^3.6.1",
+    "@inertiajs/vite": "^3.6.1",
+    "@vitejs/plugin-react": "^6.0.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}
