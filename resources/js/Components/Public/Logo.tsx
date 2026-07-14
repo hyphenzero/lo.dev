@@ -1,12 +1,6 @@
 export function Logo({ className = 'h-8 w-auto' }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 549 637"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 549 637" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

@@ -1,34 +1,35 @@
 import { Link } from '@inertiajs/react'
+import clsx from 'clsx'
 import type { ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'ghost'
-
-const variants: Record<Variant, string> = {
-  primary:
-    'bg-blue-600 text-white hover:bg-blue-700 border border-transparent',
-  secondary:
-    'bg-transparent text-white border border-white/30 hover:bg-white/10',
-  ghost:
-    'bg-transparent text-zinc-950 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800',
-}
-
 export default function Button({
-  variant = 'primary',
+  outline,
+  plain,
   href,
   children,
-  className = '',
+  className,
   ...props
 }: {
-  variant?: Variant
-  href?: string
+  outline?: boolean
+  plain?: boolean
+  href?: string | { url: string }
   children: ReactNode
   className?: string
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const base = `inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium transition-colors duration-150 ${variants[variant]} ${className}`
+  const base = clsx(
+    className,
+    'inline-block rounded-4xl px-4 py-1.5 text-sm/6 font-semibold transition-colors',
+    !outline && !plain && 'bg-blue-600 text-white hover:bg-blue-500 dark:bg-blue-800 dark:hover:bg-blue-700',
+    outline &&
+      'border border-blue-800 text-zinc-950 hover:bg-blue-50 dark:border-white/20 dark:text-white dark:hover:bg-white/20 hover:border-transparent',
+    plain && 'text-zinc-950 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900'
+  )
 
-  if (href) {
+  const resolvedHref = typeof href === 'string' ? href : href?.url
+
+  if (resolvedHref) {
     return (
-      <Link href={href} className={base}>
+      <Link href={resolvedHref} className={base}>
         {children}
       </Link>
     )

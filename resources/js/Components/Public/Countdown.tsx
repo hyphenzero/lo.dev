@@ -24,7 +24,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
   const pad = (n: number) => String(n).padStart(2, '0')
 
   return (
-    <span className="font-mono text-2xl tracking-widest tabular-nums text-white">
+    <span className="font-mono text-2xl tracking-widest text-white tabular-nums">
       {time.days}d {pad(time.hours)}h {pad(time.minutes)}m
     </span>
   )
