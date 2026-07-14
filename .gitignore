@@ -13,6 +13,7 @@
 /.vscode
 /.zed
 /auth.json
+/bootstrap/ssr
 /node_modules
 /public/build
 /public/fonts-manifest.dev.json
@@ -21,6 +22,9 @@
 /storage/*.key
 /storage/pail
 /vendor
+/resources/js/actions
+/resources/js/routes
+/resources/js/wayfinder
 _ide_helper.php
 Homestead.json
 Homestead.yaml

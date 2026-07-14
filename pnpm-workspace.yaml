@@ -1,0 +1,4 @@
+allowBuilds:
+  unrs-resolver: set this to true or false
+minimumReleaseAgeExclude:
+  - laravel-vite-plugin@3.1.3
