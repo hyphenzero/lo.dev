@@ -1,20 +1,14 @@
-import { Head, Link, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
-import { login as loginRoute, register as registerRoute } from '@/routes'
-import { request as passwordRequest } from '@/routes/password'
 import Checkbox from '@/Components/Checkbox'
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
 import GuestLayout from '@/Layouts/GuestLayout'
+import { login as loginRoute, register as registerRoute } from '@/routes'
+import { request as passwordRequest } from '@/routes/password'
+import { Head, Link, useForm } from '@inertiajs/react'
+import { FormEventHandler } from 'react'
 
-export default function Login({
-  status,
-  canResetPassword,
-}: {
-  status?: string
-  canResetPassword: boolean
-}) {
+export default function Login({ status, canResetPassword }: { status?: string; canResetPassword: boolean }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
@@ -23,7 +17,7 @@ export default function Login({
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault()
-    post(loginRoute(), {
+    post(loginRoute().url, {
       onFinish: () => reset('password'),
     })
   }
@@ -72,19 +66,12 @@ export default function Login({
 
         <div className="flex items-center justify-between">
           <label className="flex items-center">
-            <Checkbox
-              name="remember"
-              checked={data.remember}
-              onChange={(e) => setData('remember', e.target.checked)}
-            />
+            <Checkbox name="remember" checked={data.remember} onChange={(e) => setData('remember', e.target.checked)} />
             <span className="ms-2 text-sm text-zinc-600 dark:text-zinc-400">Remember me</span>
           </label>
 
           {canResetPassword && (
-            <Link
-              href={passwordRequest()}
-              className="text-sm font-medium text-blue-600 hover:text-blue-500"
-            >
+            <Link href={passwordRequest().url} className="text-sm font-medium text-blue-600 hover:text-blue-500">
               Forgot password?
             </Link>
           )}
@@ -101,7 +88,7 @@ export default function Login({
 
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
             Don't have an account?{' '}
-            <Link href={registerRoute()} className="font-medium text-blue-600 hover:text-blue-500">
+            <Link href={registerRoute().url} className="font-medium text-blue-600 hover:text-blue-500">
               Register
             </Link>
           </p>

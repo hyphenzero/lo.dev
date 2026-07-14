@@ -1,11 +1,11 @@
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
+import { update } from '@/routes/profile'
+import { send } from '@/routes/verification'
 import { Transition } from '@headlessui/react'
 import { Link, useForm, usePage } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
-import { update } from '@/routes/profile'
-import { send } from '@/routes/verification'
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -25,15 +25,13 @@ export default function UpdateProfileInformation({
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault()
-    patch(update())
+    patch(update().url)
   }
 
   return (
     <section className={className}>
       <header>
-        <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">
-          Profile Information
-        </h2>
+        <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Profile Information</h2>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Update your account's profile information and email address.
         </p>
@@ -73,10 +71,10 @@ export default function UpdateProfileInformation({
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
               Your email address is unverified.
               <Link
-                href={send()}
+                href={send().url}
                 method="post"
                 as="button"
-                className="ml-1 rounded-md text-sm text-blue-600 underline hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
+                className="ml-1 rounded-md text-sm text-blue-600 underline hover:text-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-zinc-900"
               >
                 Click here to re-send the verification email.
               </Link>

@@ -1,15 +1,24 @@
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
+import { destroy as destroyRoute } from '@/routes/profile'
 import { useForm } from '@inertiajs/react'
+import clsx from 'clsx'
 import { FormEventHandler, useRef, useState } from 'react'
-import { destroy } from '@/routes/profile'
 
 export default function DeleteUserForm({ className = '' }: { className?: string }) {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
   const passwordInput = useRef<HTMLInputElement>(null)
 
-  const { data, setData, delete: destroy, processing, reset, errors, clearErrors } = useForm({
+  const {
+    data,
+    setData,
+    delete: destroy,
+    processing,
+    reset,
+    errors,
+    clearErrors,
+  } = useForm({
     password: '',
   })
 
@@ -19,7 +28,7 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
 
   const deleteUser: FormEventHandler = (e) => {
     e.preventDefault()
-    destroy(destroy(), {
+    destroy(destroyRoute().url, {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onError: () => passwordInput.current?.focus(),
@@ -34,7 +43,7 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
   }
 
   return (
-    <section className={`space-y-6 ${className}`}>
+    <section className={clsx('space-y-6', className)}>
       <header>
         <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Delete Account</h2>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">

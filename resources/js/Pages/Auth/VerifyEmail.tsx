@@ -1,14 +1,14 @@
-import { Head, Link, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
 import { logout } from '@/routes'
 import { send } from '@/routes/verification'
+import { Head, Link, useForm } from '@inertiajs/react'
+import { FormEventHandler } from 'react'
 
 export default function VerifyEmail({ status }: { status?: string }) {
   const { post, processing } = useForm({})
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault()
-    post(send())
+    post(send().url)
   }
 
   return (
@@ -46,7 +46,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
             </button>
 
             <Link
-              href={logout()}
+              href={logout().url}
               method="post"
               as="button"
               className="inline-flex w-full items-center justify-center rounded-lg border border-zinc-200 px-5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-900"

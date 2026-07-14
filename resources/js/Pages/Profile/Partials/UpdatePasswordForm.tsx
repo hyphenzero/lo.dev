@@ -1,10 +1,10 @@
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
+import { update } from '@/routes/password'
 import { Transition } from '@headlessui/react'
 import { useForm } from '@inertiajs/react'
 import { FormEventHandler, useRef } from 'react'
-import { update } from '@/routes/password'
 
 export default function UpdatePasswordForm({ className = '' }: { className?: string }) {
   const passwordInput = useRef<HTMLInputElement>(null)
@@ -18,10 +18,10 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
 
   const updatePassword: FormEventHandler = (e) => {
     e.preventDefault()
-    put(update(), {
+    put(update().url, {
       preserveScroll: true,
       onSuccess: () => reset(),
-      onError: (errors) => {
+      onError: (errors: Record<string, string>) => {
         if (errors.password) {
           reset('password', 'password_confirmation')
           passwordInput.current?.focus()

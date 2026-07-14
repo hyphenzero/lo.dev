@@ -1,10 +1,10 @@
-import { Head, Link, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
-import { login as loginRoute, register as registerRoute } from '@/routes'
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
 import GuestLayout from '@/Layouts/GuestLayout'
+import { login as loginRoute, register as registerRoute } from '@/routes'
+import { Head, Link, useForm } from '@inertiajs/react'
+import { FormEventHandler } from 'react'
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -16,7 +16,7 @@ export default function Register() {
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault()
-    post(registerRoute(), {
+    post(registerRoute().url, {
       onFinish: () => reset('password', 'password_confirmation'),
     })
   }
@@ -96,7 +96,7 @@ export default function Register() {
 
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
             Already have an account?{' '}
-            <Link href={loginRoute()} className="font-medium text-blue-600 hover:text-blue-500">
+            <Link href={loginRoute().url} className="font-medium text-blue-600 hover:text-blue-500">
               Log in
             </Link>
           </p>

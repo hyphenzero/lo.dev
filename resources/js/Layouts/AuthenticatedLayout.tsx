@@ -1,13 +1,10 @@
-import { Link, usePage } from '@inertiajs/react'
-import { PropsWithChildren, ReactNode, useState } from 'react'
+import Container from '@/Components/Public/Container'
 import { dashboard, logout } from '@/routes'
 import { edit } from '@/routes/profile'
-import Container from '@/Components/Public/Container'
+import { Link, usePage } from '@inertiajs/react'
+import { PropsWithChildren, ReactNode, useState } from 'react'
 
-export default function AuthenticatedLayout({
-  header,
-  children,
-}: PropsWithChildren<{ header?: ReactNode }>) {
+export default function AuthenticatedLayout({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
   const user = usePage().props.auth.user
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
 
@@ -21,8 +18,8 @@ export default function AuthenticatedLayout({
                 LO.dev
               </Link>
               <Link
-                href={dashboard()}
-                className="hidden text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white sm:block"
+                href={dashboard().url}
+                className="hidden text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-950 sm:block dark:text-zinc-400 dark:hover:text-white"
               >
                 Dashboard
               </Link>
@@ -31,13 +28,13 @@ export default function AuthenticatedLayout({
             <div className="hidden items-center gap-4 sm:flex">
               <span className="text-sm text-zinc-500 dark:text-zinc-400">{user?.name}</span>
               <Link
-                href={edit()}
+                href={edit().url}
                 className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
               >
                 Profile
               </Link>
               <Link
-                href={logout()}
+                href={logout().url}
                 method="post"
                 as="button"
                 className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
@@ -63,24 +60,24 @@ export default function AuthenticatedLayout({
         </Container>
 
         {showingNavigationDropdown && (
-          <div className="border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950 sm:hidden">
+          <div className="border-t border-zinc-200 bg-white sm:hidden dark:border-zinc-800 dark:bg-zinc-950">
             <Container className="flex flex-col gap-4 py-6">
               <Link
-                href={dashboard()}
+                href={dashboard().url}
                 className="text-sm font-medium text-zinc-600 dark:text-zinc-400"
                 onClick={() => setShowingNavigationDropdown(false)}
               >
                 Dashboard
               </Link>
               <Link
-                href={edit()}
+                href={edit().url}
                 className="text-sm font-medium text-zinc-600 dark:text-zinc-400"
                 onClick={() => setShowingNavigationDropdown(false)}
               >
                 Profile
               </Link>
               <Link
-                href={logout()}
+                href={logout().url}
                 method="post"
                 as="button"
                 className="text-left text-sm font-medium text-zinc-600 dark:text-zinc-400"

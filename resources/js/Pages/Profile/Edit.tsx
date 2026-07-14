@@ -1,15 +1,12 @@
-import { Head } from '@inertiajs/react'
-import type { PageProps } from '@/types'
 import Container from '@/Components/Public/Container'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import type { PageProps } from '@/types'
+import { Head } from '@inertiajs/react'
 import DeleteUserForm from './Partials/DeleteUserForm'
 import UpdatePasswordForm from './Partials/UpdatePasswordForm'
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm'
 
-export default function Edit({
-  mustVerifyEmail,
-  status,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
+export default function Edit({ mustVerifyEmail, status }: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
   return (
     <AuthenticatedLayout
       header={<h2 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Profile</h2>}

@@ -1,13 +1,11 @@
-import { Head } from '@inertiajs/react'
 import Container from '@/Components/Public/Container'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import { Head } from '@inertiajs/react'
 
 export default function Dashboard() {
   return (
     <AuthenticatedLayout
-      header={
-        <h2 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Dashboard</h2>
-      }
+      header={<h2 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Dashboard</h2>}
     >
       <Head title="Dashboard" />
 
