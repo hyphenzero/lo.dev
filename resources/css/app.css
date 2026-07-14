@@ -10,6 +10,8 @@
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   html {
     scroll-behavior: smooth;
