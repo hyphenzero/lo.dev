@@ -11,21 +11,7 @@
     "lint:check": "eslint .",
     "types:check": "tsc --noEmit"
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "printWidth": 120,
-    "trailingComma": "es5",
-    "tailwindFunctions": [
-      "clsx",
-      "tw"
-    ],
-    "plugins": [
-      "prettier-plugin-organize-imports",
-      "prettier-plugin-tailwindcss"
-    ]
-  },
+
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@inertiajs/react": "^3.0.0",
@@ -60,5 +46,20 @@
     "@headlessui/react": "^2.2.10",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.0.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 120,
+    "trailingComma": "es5",
+    "tailwindFunctions": [
+      "clsx",
+      "tw"
+    ],
+    "plugins": [
+      "prettier-plugin-organize-imports",
+      "prettier-plugin-tailwindcss"
+    ]
   }
 }
