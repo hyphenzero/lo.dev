@@ -1,16 +1,17 @@
+import { Head } from '@inertiajs/react'
 import Container from '@/Components/Public/Container'
-import PublicLayout from '@/Layouts/PublicLayout'
 
 export default function About() {
   return (
-    <PublicLayout title="About">
+    <>
+      <Head title="About" />
       <div className="pt-32">
         <Container>
           <div className="mx-auto max-w-3xl">
-            <p className="mb-4 font-mono text-xs font-medium uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+            <p className="mb-4 font-mono text-xs font-medium tracking-[0.15em] text-zinc-400 uppercase dark:text-zinc-500">
               About
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100 sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 sm:text-5xl dark:text-zinc-100">
               About the Club
             </h1>
 
@@ -30,6 +31,6 @@ export default function About() {
       </div>
 
       <div className="py-28" />
-    </PublicLayout>
+    </>
   )
 }
