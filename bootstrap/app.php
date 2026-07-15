@@ -7,6 +7,9 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\OnceProp;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -27,4 +30,28 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
+
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+            if (in_array($response->getStatusCode(), [403, 404, 500, 503])) {
+                $middleware = app(HandleInertiaRequests::class);
+
+                Inertia::version(fn () => $middleware->version($request));
+                Inertia::setRootView($middleware->rootView($request));
+                Inertia::share($middleware->share($request));
+
+                foreach ($middleware->shareOnce($request) as $key => $value) {
+                    if ($value instanceof OnceProp) {
+                        Inertia::share($key, $value);
+                    } else {
+                        Inertia::shareOnce($key, $value);
+                    }
+                }
+
+                return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
+                    ->toResponse($request)
+                    ->setStatusCode($response->getStatusCode());
+            }
+
+            return $response;
+        });
     })->create();
