@@ -85,8 +85,8 @@ export default function Navbar() {
                         ? 'text-blue-400'
                         : 'text-blue-200 hover:text-white'
                       : active
-                        ? 'text-blue-500 dark:text-blue-400'
-                        : 'text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white'
+                        ? 'text-blue-500'
+                        : 'text-zinc-950 hover:text-zinc-700 dark:text-white dark:hover:text-zinc-300'
                   )}
                 >
                   {link.label}
