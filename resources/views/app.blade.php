@@ -19,30 +19,13 @@
             })();
         </script>
 
-        {{-- Inline style to set the HTML background color based on our theme in app.css --}}
-        <style>
-            html {
-                background-color: oklch(1 0 0);
-            }
-
-            html.dark {
-                background-color: oklch(0.145 0 0);
-            }
-
-            @media (prefers-color-scheme: dark) {
-                html:not(.light, .dark) {
-                    background-color: oklch(0.145 0 0);
-                }
-            }
-        </style>
-
         @fonts
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
         <x-inertia::head />
     </head>
-    <body class="font-sans antialiased">
+    <body class="antialiased bg-white dark:bg-zinc-950">
         <x-inertia::app />
     </body>
 </html>
