@@ -1,10 +1,12 @@
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import TextInput from '@/Components/TextInput'
-import GuestLayout from '@/Layouts/GuestLayout'
+import Button from '@/Components/Public/Button'
+import { ErrorMessage, Field, Label } from '@/Components/Public/Fieldset'
+import { Heading } from '@/Components/Public/Heading'
+import { Input } from '@/Components/Public/Input'
+import { Logo } from '@/Components/Public/Logo'
+import { Text } from '@/Components/Public/Text'
 import { email } from '@/routes/password'
 import { Head, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
+import { FormEventHandler, useEffect, useRef } from 'react'
 
 export default function ForgotPassword({ status }: { status?: string }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -16,14 +18,14 @@ export default function ForgotPassword({ status }: { status?: string }) {
     post(email().url)
   }
 
-  return (
-    <GuestLayout>
-      <Head title="Forgot Password" />
+  const emailRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    emailRef.current?.focus()
+  }, [])
 
-      <h2 className="mb-2 text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Reset password</h2>
-      <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
-        Forgot your password? No problem. Let us know your email address and we will email you a password reset link.
-      </p>
+  return (
+    <>
+      <Head title="Forgot Password" />
 
       {status && (
         <div className="mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-600 dark:border-green-800 dark:bg-green-950 dark:text-green-400">
@@ -31,29 +33,29 @@ export default function ForgotPassword({ status }: { status?: string }) {
         </div>
       )}
 
-      <form onSubmit={submit} className="space-y-5">
-        <div>
-          <InputLabel htmlFor="email" value="Email" />
-          <TextInput
-            id="email"
+      <form action="" method="POST" onSubmit={submit} className="grid w-full max-w-sm grid-cols-1 gap-8">
+        <Logo className="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]" />
+        <Heading>Reset password</Heading>
+        <Text>
+          Forgot your password? No problem. Let us know your email address and we will email you a password reset link.
+        </Text>
+        <Field>
+          <Label>Email</Label>
+          <Input
             type="email"
             name="email"
+            ref={emailRef}
             value={data.email}
-            className="mt-1 block w-full"
-            isFocused
             onChange={(e) => setData('email', e.target.value)}
+            invalid={!!errors.email}
+            autoComplete="username"
           />
-          <InputError message={errors.email} className="mt-2" />
-        </div>
-
-        <button
-          type="submit"
-          disabled={processing}
-          className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
-        >
+          {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+        </Field>
+        <Button type="submit" disabled={processing} className="w-full rounded-lg">
           Email Password Reset Link
-        </button>
+        </Button>
       </form>
-    </GuestLayout>
+    </>
   )
 }

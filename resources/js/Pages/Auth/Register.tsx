@@ -1,10 +1,12 @@
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import TextInput from '@/Components/TextInput'
-import GuestLayout from '@/Layouts/GuestLayout'
+import Button from '@/Components/Public/Button'
+import { ErrorMessage, Field, Label } from '@/Components/Public/Fieldset'
+import { Heading } from '@/Components/Public/Heading'
+import { Input } from '@/Components/Public/Input'
+import { Logo } from '@/Components/Public/Logo'
+import { Strong, Text, TextLink } from '@/Components/Public/Text'
 import { login as loginRoute, register as registerRoute } from '@/routes'
-import { Head, Link, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
+import { Head, useForm } from '@inertiajs/react'
+import { FormEventHandler, useEffect, useRef } from 'react'
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -21,87 +23,77 @@ export default function Register() {
     })
   }
 
+  const nameRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    nameRef.current?.focus()
+  }, [])
+
   return (
-    <GuestLayout>
+    <>
       <Head title="Register" />
 
-      <h2 className="mb-6 text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Create an account</h2>
-
-      <form onSubmit={submit} className="space-y-5">
-        <div>
-          <InputLabel htmlFor="name" value="Name" />
-          <TextInput
-            id="name"
+      <form action="" method="POST" onSubmit={submit} className="grid w-full max-w-sm grid-cols-1 gap-8">
+        <Logo className="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]" />
+        <Heading>Create an account</Heading>
+        <Field>
+          <Label>Name</Label>
+          <Input
             type="text"
             name="name"
+            ref={nameRef}
             value={data.name}
-            className="mt-1 block w-full"
-            autoComplete="name"
-            isFocused
             onChange={(e) => setData('name', e.target.value)}
+            invalid={!!errors.name}
+            autoComplete="name"
           />
-          <InputError message={errors.name} className="mt-2" />
-        </div>
-
-        <div>
-          <InputLabel htmlFor="email" value="Email" />
-          <TextInput
-            id="email"
+          {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+        </Field>
+        <Field>
+          <Label>Email</Label>
+          <Input
             type="email"
             name="email"
             value={data.email}
-            className="mt-1 block w-full"
-            autoComplete="username"
             onChange={(e) => setData('email', e.target.value)}
+            invalid={!!errors.email}
+            autoComplete="username"
           />
-          <InputError message={errors.email} className="mt-2" />
-        </div>
-
-        <div>
-          <InputLabel htmlFor="password" value="Password" />
-          <TextInput
-            id="password"
+          {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+        </Field>
+        <Field>
+          <Label>Password</Label>
+          <Input
             type="password"
             name="password"
             value={data.password}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
             onChange={(e) => setData('password', e.target.value)}
+            invalid={!!errors.password}
+            autoComplete="new-password"
           />
-          <InputError message={errors.password} className="mt-2" />
-        </div>
-
-        <div>
-          <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-          <TextInput
-            id="password_confirmation"
+          {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+        </Field>
+        <Field>
+          <Label>Confirm Password</Label>
+          <Input
             type="password"
             name="password_confirmation"
             value={data.password_confirmation}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
             onChange={(e) => setData('password_confirmation', e.target.value)}
+            invalid={!!errors.password_confirmation}
+            autoComplete="new-password"
           />
-          <InputError message={errors.password_confirmation} className="mt-2" />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <button
-            type="submit"
-            disabled={processing}
-            className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
-          >
-            Register
-          </button>
-
-          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-            Already have an account?{' '}
-            <Link href={loginRoute().url} className="font-medium text-blue-600 hover:text-blue-500">
-              Log in
-            </Link>
-          </p>
-        </div>
+          {errors.password_confirmation && <ErrorMessage>{errors.password_confirmation}</ErrorMessage>}
+        </Field>
+        <Button type="submit" disabled={processing} className="w-full rounded-lg">
+          Register
+        </Button>
+        <Text>
+          Already have an account?{' '}
+          <TextLink href={loginRoute().url}>
+            <Strong>Log in</Strong>
+          </TextLink>
+        </Text>
       </form>
-    </GuestLayout>
+    </>
   )
 }

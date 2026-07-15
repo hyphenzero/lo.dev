@@ -1,10 +1,12 @@
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import TextInput from '@/Components/TextInput'
-import GuestLayout from '@/Layouts/GuestLayout'
+import Button from '@/Components/Public/Button'
+import { ErrorMessage, Field, Label } from '@/Components/Public/Fieldset'
+import { Heading } from '@/Components/Public/Heading'
+import { Input } from '@/Components/Public/Input'
+import { Logo } from '@/Components/Public/Logo'
+import { Text } from '@/Components/Public/Text'
 import { confirm } from '@/routes/password'
 import { Head, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
+import { FormEventHandler, useEffect, useRef } from 'react'
 
 export default function ConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -18,40 +20,36 @@ export default function ConfirmPassword() {
     })
   }
 
+  const passwordRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    passwordRef.current?.focus()
+  }, [])
+
   return (
-    <GuestLayout>
+    <>
       <Head title="Confirm Password" />
 
-      <h2 className="mb-2 text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">
-        Confirm your password
-      </h2>
-      <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
-        This is a secure area of the application. Please confirm your password before continuing.
-      </p>
-
-      <form onSubmit={submit} className="space-y-5">
-        <div>
-          <InputLabel htmlFor="password" value="Password" />
-          <TextInput
-            id="password"
+      <form action="" method="POST" onSubmit={submit} className="grid w-full max-w-sm grid-cols-1 gap-8">
+        <Logo className="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]" />
+        <Heading>Confirm your password</Heading>
+        <Text>This is a secure area of the application. Please confirm your password before continuing.</Text>
+        <Field>
+          <Label>Password</Label>
+          <Input
             type="password"
             name="password"
+            ref={passwordRef}
             value={data.password}
-            className="mt-1 block w-full"
-            isFocused
             onChange={(e) => setData('password', e.target.value)}
+            invalid={!!errors.password}
+            autoComplete="current-password"
           />
-          <InputError message={errors.password} className="mt-2" />
-        </div>
-
-        <button
-          type="submit"
-          disabled={processing}
-          className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
-        >
+          {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+        </Field>
+        <Button type="submit" disabled={processing} className="w-full rounded-lg">
           Confirm
-        </button>
+        </Button>
       </form>
-    </GuestLayout>
+    </>
   )
 }
