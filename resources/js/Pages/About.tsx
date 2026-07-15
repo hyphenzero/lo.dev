@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react'
 import Container from '@/Components/Public/Container'
+import { Head } from '@inertiajs/react'
 
 export default function About() {
   return (

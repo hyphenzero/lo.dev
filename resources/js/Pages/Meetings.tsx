@@ -1,6 +1,6 @@
-import { Head } from '@inertiajs/react'
 import Container from '@/Components/Public/Container'
 import Countdown from '@/Components/Public/Countdown'
+import { Head } from '@inertiajs/react'
 
 const nextMeeting = new Date()
 nextMeeting.setDate(nextMeeting.getDate() + ((2 - nextMeeting.getDay() + 7) % 7 || 7))
@@ -35,7 +35,7 @@ export default function Meetings() {
                 </div>
                 <div>
                   <p className="font-mono text-xs tracking-wider text-zinc-400 uppercase">Location</p>
-                  <p className="mt-1 text-xl font-semibold text-zinc-950 dark:text-zinc-100">Room 100</p>
+                  <p className="mt-1 text-xl font-semibold text-zinc-950 dark:text-zinc-100">Room 100 — Ms. Rose</p>
                 </div>
                 <div>
                   <p className="font-mono text-xs tracking-wider text-zinc-400 uppercase">Countdown</p>

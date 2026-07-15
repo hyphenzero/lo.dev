@@ -1,7 +1,7 @@
-import { Head } from '@inertiajs/react'
 import Button from '@/Components/Public/Button'
 import Container from '@/Components/Public/Container'
 import { register } from '@/routes'
+import { Head } from '@inertiajs/react'
 
 export default function Join() {
   return (

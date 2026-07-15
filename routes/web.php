@@ -16,10 +16,6 @@ Route::get('/meetings', function () {
     return Inertia::render('Meetings');
 })->name('meetings');
 
-Route::get('/officers', function () {
-    return Inertia::render('Officers');
-})->name('officers');
-
 Route::get('/join', function () {
     return Inertia::render('Join');
 })->name('join');

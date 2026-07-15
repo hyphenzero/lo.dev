@@ -1,11 +1,11 @@
 import Button from '@/Components/Public/Button'
-import SwirlHero from '@/Components/Public/SwirlHero'
 import Container from '@/Components/Public/Container'
 import Countdown from '@/Components/Public/Countdown'
 import EmptyState from '@/Components/Public/EmptyState'
 import FadeIn from '@/Components/Public/FadeIn'
 import SectionHeading from '@/Components/Public/SectionHeading'
-import { about, meetings, register } from '@/routes'
+import SwirlHero from '@/Components/Public/SwirlHero'
+import { meetings, register } from '@/routes'
 
 const nextMeeting = new Date()
 nextMeeting.setDate(nextMeeting.getDate() + ((2 - nextMeeting.getDay() + 7) % 7 || 7))
@@ -119,6 +119,24 @@ export default function Home() {
       </FadeIn>
 
       <FadeIn delay={400}>
+        <section className="border-b border-zinc-200 py-28 dark:border-zinc-800">
+          <Container>
+            <SectionHeading heading="Club Leaders" label="TEAM" />
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {['President', 'Vice President', 'Secretary', 'Treasurer', 'Webmaster', 'Event Coordinator'].map(
+                (role) => (
+                  <div key={role} className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
+                    <p className="font-mono text-xs tracking-[0.15em] text-blue-600 uppercase">{role}</p>
+                    <p className="mt-3 text-zinc-400 dark:text-zinc-500">Coming soon</p>
+                  </div>
+                )
+              )}
+            </div>
+          </Container>
+        </section>
+      </FadeIn>
+
+      <FadeIn delay={500}>
         <section className="py-28">
           <Container className="text-center">
             <h2 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl dark:text-zinc-100">
