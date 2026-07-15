@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { cn } from '@/lib/cn'
 import { type ReactNode, useEffect, useRef, useState } from 'react'
 
 export default function FadeIn({
@@ -32,7 +32,7 @@ export default function FadeIn({
   return (
     <div
       ref={ref}
-      className={clsx(
+      className={cn(
         'transition-all duration-700',
         visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0',
         className

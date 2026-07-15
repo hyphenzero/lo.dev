@@ -1,5 +1,5 @@
+import { cn } from '@/lib/cn'
 import * as Headless from '@headlessui/react'
-import clsx from 'clsx'
 import type React from 'react'
 
 export function CheckboxGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
@@ -7,12 +7,10 @@ export function CheckboxGroup({ className, ...props }: React.ComponentPropsWitho
     <div
       data-slot="control"
       {...props}
-      className={clsx(
-        className,
-        // Basic groups
+      className={cn(
         'space-y-3',
-        // With descriptions
-        'has-data-[slot=description]:space-y-6 has-data-[slot=description]:**:data-[slot=label]:font-medium'
+        'has-data-[slot=description]:space-y-6 has-data-[slot=description]:**:data-[slot=label]:font-medium',
+        className
       )}
     />
   )
@@ -26,7 +24,7 @@ export function CheckboxField({
     <Headless.Field
       data-slot="field"
       {...props}
-      className={clsx(
+      className={cn(
         className,
         // Base layout
         'grid grid-cols-[1.125rem_1fr] gap-x-4 gap-y-1 sm:grid-cols-[1rem_1fr]',
@@ -126,9 +124,9 @@ export function Checkbox({
     <Headless.Checkbox
       data-slot="control"
       {...props}
-      className={clsx(className, 'group inline-flex focus:outline-hidden')}
+      className={cn('group inline-flex focus:outline-hidden', className)}
     >
-      <span className={clsx([base, colors[color]])}>
+      <span className={cn(base, colors[color])}>
         <svg
           className="size-4 stroke-(--checkbox-check) opacity-0 group-data-checked:opacity-100 sm:h-3.5 sm:w-3.5"
           viewBox="0 0 14 14"

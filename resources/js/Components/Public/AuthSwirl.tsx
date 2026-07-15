@@ -9,13 +9,13 @@ const SHOW_CRT = false
 const AUTH_CONFIG: StageConfig = {
   ...DEFAULT_STAGE,
   rows: undefined,
-  word: 'lo.dev',
+  word: 'lohs.dev',
   style: 'slant',
   inkStops: ['#60a5fa'],
   logoColor: '#ffffff',
   bg: '#2563eb',
   text: DEFAULT_TEXT,
-  zoom: 0.85,
+  zoom: 0.55,
   scanlines: SHOW_CRT ? 0.3 : 0,
   aberration: SHOW_CRT ? 0.8 : 0,
   curvature: 0.6,
@@ -32,27 +32,33 @@ export default function AuthSwirl() {
 
   const stageRef = useSwirlStage(canvasRef, cfg, () => setFailed(true))
 
-  const handlePointer = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
-    if (!canvas || !stageRef.current) return
-    const rect = canvas.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
-    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1
-    stageRef.current.setPointer({ x, y })
-  }, [stageRef, canvasRef])
+  const handlePointer = useCallback(
+    (e: React.PointerEvent<HTMLCanvasElement>) => {
+      const canvas = canvasRef.current
+      if (!canvas || !stageRef.current) return
+      const rect = canvas.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1
+      stageRef.current.setPointer({ x, y })
+    },
+    [stageRef, canvasRef]
+  )
 
   const handlePointerLeave = useCallback(() => {
     stageRef.current?.setPointer(null)
   }, [stageRef])
 
-  const handleClick = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
-    if (!canvas || !stageRef.current) return
-    const rect = canvas.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
-    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1
-    stageRef.current.burst(x, y)
-  }, [stageRef, canvasRef])
+  const handleClick = useCallback(
+    (e: React.PointerEvent<HTMLCanvasElement>) => {
+      const canvas = canvasRef.current
+      if (!canvas || !stageRef.current) return
+      const rect = canvas.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1
+      stageRef.current.burst(x, y)
+    },
+    [stageRef, canvasRef]
+  )
 
   return (
     <div className="relative h-full w-full overflow-hidden rounded-lg bg-blue-600">
@@ -63,7 +69,7 @@ export default function AuthSwirl() {
           onPointerLeave={handlePointerLeave}
           onClick={handleClick}
           className="absolute inset-0 h-full w-full cursor-default"
-          style={{ transform: 'scale(1.15)' }}
+          style={{ transform: 'scale(0.75)' }}
         />
       ) : (
         <div className="absolute inset-0 bg-blue-600" />

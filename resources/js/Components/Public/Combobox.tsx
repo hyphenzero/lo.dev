@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@/lib/cn'
 import * as Headless from '@headlessui/react'
-import clsx from 'clsx'
 import { useState } from 'react'
 
 export function Combobox<T>({
@@ -38,8 +38,7 @@ export function Combobox<T>({
     <Headless.Combobox {...props} multiple={false} virtual={{ options: filteredOptions }} onClose={() => setQuery('')}>
       <span
         data-slot="control"
-        className={clsx([
-          className,
+        className={cn([
           // Basic layout
           'relative block w-full',
           // Background color + shadow applied to inset pseudo element, so shadow blends with border in light mode
@@ -52,6 +51,7 @@ export function Combobox<T>({
           'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
           // Invalid state
           'has-data-invalid:before:shadow-red-500/10',
+          className,
         ])}
       >
         <Headless.ComboboxInput
@@ -61,8 +61,7 @@ export function Combobox<T>({
           displayValue={(option: T) => displayValue(option) ?? ''}
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
-          className={clsx([
-            className,
+          className={cn([
             // Basic layout
             'relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
             // Horizontal padding
@@ -81,6 +80,7 @@ export function Combobox<T>({
             'data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15',
             // System icons
             'dark:scheme-dark',
+            className,
           ])}
         />
         <Headless.ComboboxButton className="group absolute inset-y-0 right-0 flex items-center px-2">
@@ -98,7 +98,7 @@ export function Combobox<T>({
       <Headless.ComboboxOptions
         transition
         anchor={anchor}
-        className={clsx(
+        className={cn(
           // Anchor positioning
           '[--anchor-gap:--spacing(2)] [--anchor-padding:--spacing(4)] sm:data-[anchor~=start]:[--anchor-offset:-4px]',
           // Base styles,
@@ -129,7 +129,7 @@ export function ComboboxOption<T>({
   Headless.ComboboxOptionProps<'div', T>,
   'as' | 'className'
 >) {
-  let sharedClasses = clsx(
+  let sharedClasses = cn(
     // Base
     'flex min-w-0 items-center',
     // Icons
@@ -143,7 +143,7 @@ export function ComboboxOption<T>({
   return (
     <Headless.ComboboxOption
       {...props}
-      className={clsx(
+      className={cn(
         // Basic layout
         'group/option grid w-full cursor-default grid-cols-[1fr_--spacing(5)] items-baseline gap-x-2 rounded-lg py-2.5 pr-2 pl-3.5 sm:grid-cols-[1fr_--spacing(4)] sm:py-1.5 sm:pr-2 sm:pl-3',
         // Typography
@@ -156,7 +156,7 @@ export function ComboboxOption<T>({
         'data-disabled:opacity-50'
       )}
     >
-      <span className={clsx(className, sharedClasses)}>{children}</span>
+      <span className={cn(sharedClasses, className)}>{children}</span>
       <svg
         className="relative col-start-2 hidden size-5 self-center stroke-current group-data-selected/option:inline sm:size-4"
         viewBox="0 0 16 16"
@@ -170,16 +170,16 @@ export function ComboboxOption<T>({
 }
 
 export function ComboboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
-  return <span {...props} className={clsx(className, 'ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0')} />
+  return <span {...props} className={cn('ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0', className)} />
 }
 
 export function ComboboxDescription({ className, children, ...props }: React.ComponentPropsWithoutRef<'span'>) {
   return (
     <span
       {...props}
-      className={clsx(
-        className,
-        'flex flex-1 overflow-hidden text-zinc-500 group-data-focus/option:text-white before:w-2 before:min-w-0 before:shrink dark:text-zinc-400'
+      className={cn(
+        'flex flex-1 overflow-hidden text-zinc-500 group-data-focus/option:text-white before:w-2 before:min-w-0 before:shrink dark:text-zinc-400',
+        className
       )}
     >
       <span className="flex-1 truncate">{children}</span>

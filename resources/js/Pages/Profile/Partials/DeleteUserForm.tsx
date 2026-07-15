@@ -1,9 +1,9 @@
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
+import { cn } from '@/lib/cn'
 import { destroy as destroyRoute } from '@/routes/profile'
 import { useForm } from '@inertiajs/react'
-import clsx from 'clsx'
 import { FormEventHandler, useRef, useState } from 'react'
 
 export default function DeleteUserForm({ className = '' }: { className?: string }) {
@@ -43,7 +43,7 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
   }
 
   return (
-    <section className={clsx('space-y-6', className)}>
+    <section className={cn('space-y-6', className)}>
       <header>
         <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">Delete Account</h2>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">

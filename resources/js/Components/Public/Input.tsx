@@ -1,12 +1,12 @@
+import { cn } from '@/lib/cn'
 import * as Headless from '@headlessui/react'
-import clsx from 'clsx'
 import React, { forwardRef } from 'react'
 
 export function InputGroup({ children }: React.ComponentPropsWithoutRef<'span'>) {
   return (
     <span
       data-slot="control"
-      className={clsx(
+      className={cn(
         'relative isolate block',
         'has-[[data-slot=icon]:first-child]:[&_input]:pl-10 has-[[data-slot=icon]:last-child]:[&_input]:pr-10 sm:has-[[data-slot=icon]:first-child]:[&_input]:pl-8 sm:has-[[data-slot=icon]:last-child]:[&_input]:pr-8',
         '*:data-[slot=icon]:pointer-events-none *:data-[slot=icon]:absolute *:data-[slot=icon]:top-3 *:data-[slot=icon]:z-10 *:data-[slot=icon]:size-5 sm:*:data-[slot=icon]:top-2.5 sm:*:data-[slot=icon]:size-4',
@@ -35,24 +35,19 @@ export const Input = forwardRef(function Input(
   return (
     <span
       data-slot="control"
-      className={clsx([
-        className,
-        // Basic layout
+      className={cn(
         'relative block w-full',
-        // Background color + shadow applied to inset pseudo element, so shadow blends with border in light mode
         'before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm',
-        // Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
         'dark:before:hidden',
-        // Focus ring
         'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500',
-        // Disabled state
         'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
-      ])}
+        className
+      )}
     >
       <Headless.Input
         ref={ref}
         {...props}
-        className={clsx([
+        className={cn(
           // Date classes
           props.type &&
             dateTypes.includes(props.type) && [
@@ -84,8 +79,8 @@ export const Input = forwardRef(function Input(
           // Disabled state
           'data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15',
           // System icons
-          'dark:scheme-dark',
-        ])}
+          'dark:scheme-dark'
+        )}
       />
     </span>
   )

@@ -120,7 +120,7 @@ export default function CodeParticles() {
         const r = radialStep / 2 + ringIndex * radialStep
         if (r + maxW / 2 > maxR || si >= snippets.length) break
 
-        const count = Math.max(3, Math.floor(2 * Math.PI / Math.acos(1 - Math.min(1, (textH + GAP) / r))))
+        const count = Math.max(3, Math.floor((2 * Math.PI) / Math.acos(1 - Math.min(1, (textH + GAP) / r))))
         const particles: Particle[] = []
 
         for (let i = 0; i < count && si < snippets.length; i++) {

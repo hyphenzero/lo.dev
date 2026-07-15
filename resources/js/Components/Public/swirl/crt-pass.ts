@@ -1,9 +1,9 @@
-export const BARREL_GAIN = 0.1;
-export const BARREL_PINCH = 0.085;
-export const BARREL_EDGE = 0.05;
-export const ABERRATION_UV = 0.0028;
-export const VIGNETTE = 0.7;
-export const CURVE_RAMP_SEC = 3.0;
+export const BARREL_GAIN = 0.1
+export const BARREL_PINCH = 0.085
+export const BARREL_EDGE = 0.05
+export const ABERRATION_UV = 0.0028
+export const VIGNETTE = 0.7
+export const CURVE_RAMP_SEC = 3.0
 
 export const CRT_FRAG = `#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
@@ -49,10 +49,10 @@ void main(){
   }
 
   gl_FragColor = vec4(col, 1.0);
-}`;
+}`
 
 export const CRT_VERT = `attribute vec4 aPos; attribute vec2 aUv; varying vec2 vUv;
-void main(){ gl_Position = aPos; vUv = aUv; }`;
+void main(){ gl_Position = aPos; vUv = aUv; }`
 
 export const TEXT_VERT = `attribute vec2 aCorner; attribute vec4 aBounds; attribute vec4 aGlyphUv; attribute vec4 aColor;
 uniform vec2 uTarget; varying vec2 vGlyphUv; varying vec4 vColor;
@@ -62,12 +62,12 @@ void main(){
   gl_Position = vec4(clip, 0.0, 1.0);
   vGlyphUv = mix(aGlyphUv.xy, aGlyphUv.zw, aCorner);
   vColor = aColor;
-}`;
+}`
 
 export const TEXT_FRAG = `precision mediump float; varying vec2 vGlyphUv; varying vec4 vColor; uniform sampler2D uAtlas;
-void main(){ float a = texture2D(uAtlas, vGlyphUv).a; if(a <= 0.001) discard; gl_FragColor = vec4(vColor.rgb, vColor.a * a); }`;
+void main(){ float a = texture2D(uAtlas, vGlyphUv).a; if(a <= 0.001) discard; gl_FragColor = vec4(vColor.rgb, vColor.a * a); }`
 
 function CRT_NUM(n: number): string {
-  const s = String(n);
-  return s.includes(".") ? s : s + ".0";
+  const s = String(n)
+  return s.includes('.') ? s : s + '.0'
 }

@@ -1,7 +1,4 @@
 export const DEFAULT_TEXT = `import { useRef, useEffect, useCallback, useMemo, useReducer, useState, type RefObject, type DependencyList } from "react"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
 function memoize<A, B>(fn: (arg: A) => B) {
   const cache = new Map<string, { value: B; timestamp: number }>()
   let hits = 0, misses = 0, evictions = 0
@@ -76,6 +73,4 @@ const sortedBySteps = [...collatzResults].sort((a, b) => b.steps - a.steps)
 const topFive = sortedBySteps.slice(0, 5)
 const summary = { total: collatzResults.length, averageSteps, longest: { n: longest.n, steps: longest.steps }, topFive, stepDistribution }
 console.table(summary)
-export { cn, memoize, memoizeWithLimit, memoizeRecursive, fibSequence, factorials, computedValues, collatzResults, summary }`
-
-
+export { memoize, memoizeWithLimit, memoizeRecursive, fibSequence, factorials, computedValues, collatzResults, summary }`
